@@ -31,9 +31,15 @@ Route::get('/logout', [AuthController::class, 'logout'])
     ->middleware('auth');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/home', [IndexController::class, 'viewHome'])->name('home');
-    Route::get('/create/pub/{section}/{type}/{pub?}', [IndexController::class, 'viewCreatePub'])->name('create-pub');
-    Route::get('/del/pub/{pub}', [IndexController::class, 'delPub'])->name('delpub');
-    Route::post('/create/pub/{section}/{type}/{pub?}', [IndexController::class, 'createPub'])->name('post.createpub');
+    Route::get('/', [IndexController::class, 'viewHome'])->name('home');
+    Route::get('/create/article/{section}/{article?}', [IndexController::class, 'viewCreateArticle'])->name('create-article');
+    Route::get('/create/report/{section}/{report?}', [IndexController::class, 'viewCreateReport'])->name('create-report');
+    Route::get('/create/book/{section}/{book?}', [IndexController::class, 'viewCreateBook'])->name('create-book');
+    Route::get('/del/article/{article}', [IndexController::class, 'delArticle'])->name('delarticle');
+    Route::get('/del/report/{report}', [IndexController::class, 'delReport'])->name('delreport');
+    Route::get('/del/book/{book}', [IndexController::class, 'delBook'])->name('delbook');
+    Route::post('/create/article/{section}/{article?}', [IndexController::class, 'createArticle'])->name('post.createarticle');
+    Route::post('/create/report/{section}/{report?}', [IndexController::class, 'createReport'])->name('post.createreport');
+    Route::post('/create/book/{section}/{book?}', [IndexController::class, 'createBook'])->name('post.createbook');
     Route::get('/download/pdf/{filename}', [IndexController::class, 'getDownload'])->name('downpdf');
 });

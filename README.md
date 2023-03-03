@@ -2,9 +2,6 @@
 
 <h1 style="color:blue">Registration of Publicaiton Made with Laravel</h1>
 
-<img src="login.png" />
-<img src="home.png" />
-
 <h2 style="color:cyan">Installation</h2>
 <ul>
     <li>Clone the Repo: <br> </li>
@@ -14,8 +11,13 @@
     <li> > cp .env.example .env</li>
     <li> > Set up .env file</li>
     <li> > php artisan key:generate</li>
-    <li> > php artisan migrate:fresh --seed</li>
+    <li> > php artisan migrate:fresh</li>
+    <li> > php artisan db:seed</li>
     <li> > php artisan serve</li>
-    <li> <a href="http://127.0.0.1:8000/">http://127.0.0.1:8000/</a> </li>
-    </ul>
-    <p style="color:yellow">If you like this project please leave a star ❤<p>
+    <li> <a href="http://127.0.0.1:8000/login">http://127.0.0.1:8000/login</a> </li>
+</ul>
+<h2 style="color:cyan">Run Detail</h2>
+<p>At first you have to sign up.</p>
+<p>In home page you can can click publication type you want to register.</p>
+<p>After input all necessary data, you can see your publication in home page - You can edit and delete that and also download pdf file</p>
+<p style="color:yellow">If you like this project please leave a star ❤<p>

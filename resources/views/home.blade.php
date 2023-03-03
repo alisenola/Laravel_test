@@ -8,10 +8,9 @@
     <div class="dropdown">
         <button class="dropbtn">Create Publication</button>
         <div class="dropdown-content">
-            <a href="{{ route('create-pub', ['section' => 'add', 'type' => 'article']) }}"> Create Article</a>
-            <a href="{{ route('create-pub', ['section' => 'add', 'type' => 'client report']) }}"> Create Client
-                Report</a>
-            <a href="{{ route('create-pub', ['section' => 'add', 'type' => 'book']) }}"> Create Book</a>
+            <a href="{{ route('create-article', ['section' => 'add']) }}"> Create Article</a>
+            <a href="{{ route('create-report', ['section' => 'add']) }}"> Create Client Report</a>
+            <a href="{{ route('create-book', ['section' => 'add']) }}"> Create Book</a>
         </div>
     </div>
     <table class="table mt-4">
@@ -30,18 +29,22 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($articles as $pub)
+            @foreach($articles as $article)
             <tr>
-                <td>{{ $pub->title }}</td>
-                <td>{{ $pub->summary }}</td>
-                <td>{{ $pub->authors }}</td>
-                <td><img src="{{ $pub->startpage }}" width="60px" height="80px" /></td>
-                <td><img src="{{ $pub->endpage }}" width="60px" height="80px" /></td>
-                <td><a href="{{ route('downpdf', ['filename' => $pub->pdffile]) }}">{{ $pub->pdffile }}<a></td>
+                <td>{{ $article->title }}</td>
+                <td>{{ $article->summary }}</td>
                 <td>
-                    <a href="{{ route('create-pub', ['section' => 'edit', 'type' => 'article', 'pub' => $pub->id]) }}"
+                    @foreach($article->authors() as $author)
+                    {{ $author->name }},
+                    @endforeach
+                </td>
+                <td>{{ $article->startpage }}</td>
+                <td>{{ $article->endpage }}</td>
+                <td><a href="{{ route('downpdf', ['filename' => $article->pdffile]) }}">{{ $article->pdffile }}<a></td>
+                <td>
+                    <a href="{{ route('create-article', ['section' => 'edit', 'article' => $article->id]) }}"
                         value="edit" title="edit"><i class="fas fa-edit"></i></a>
-                    <a href="{{ route('delpub', ['pub' => $pub->id]) }}" value="delete" title="delete"><i
+                    <a href="{{ route('delarticle', ['article' => $article->id]) }}" value="delete" title="delete"><i
                             class="fas fa-trash"></i></a>
                 </td>
             </tr>
@@ -64,18 +67,22 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($reports as $pub)
+            @foreach($reports as $report)
             <tr>
-                <td>{{ $pub->title }}</td>
-                <td>{{ $pub->summary }}</td>
-                <td>{{ $pub->authors }}</td>
-                <td>{{ $pub->client_name }}</td>
-                <td>{{ $pub->project_name }}</td>
-                <td><a href="{{ route('downpdf', ['filename' => $pub->pdffile]) }}">{{ $pub->pdffile }}</a></td>
+                <td>{{ $report->title }}</td>
+                <td>{{ $report->summary }}</td>
                 <td>
-                    <a href="{{ route('create-pub', ['section' => 'edit', 'type' => 'client report', 'pub' => $pub->id]) }}"
-                        value="edit" title="edit"><i class="fas fa-edit"></i></a>
-                    <a href="{{ route('delpub', ['pub' => $pub->id]) }}" value="delete" title="delete"><i
+                    @foreach($report->authors() as $author)
+                    {{ $author->name }},
+                    @endforeach
+                </td>
+                <td>{{ $report->client_name }}</td>
+                <td>{{ $report->project_name }}</td>
+                <td><a href="{{ route('downpdf', ['filename' => $report->pdffile]) }}">{{ $report->pdffile }}</a></td>
+                <td>
+                    <a href="{{ route('create-report', ['section' => 'edit', 'report' => $report->id]) }}" value="edit"
+                        title="edit"><i class="fas fa-edit"></i></a>
+                    <a href="{{ route('delreport', ['report' => $report->id]) }}" value="delete" title="delete"><i
                             class="fas fa-trash"></i></a>
                 </td>
             </tr>
@@ -98,18 +105,22 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($books as $pub)
+            @foreach($books as $book)
             <tr>
-                <td>{{ $pub->title }}</td>
-                <td>{{ $pub->summary }}</td>
-                <td>{{ $pub->authors }}</td>
-                <td>{{ $pub->topics }}</td>
-                <td>{{ $pub->numpages }}</td>
-                <td><a href="{{ route('downpdf', ['filename' => $pub->pdffile]) }}">{{ $pub->pdffile }}</a></td>
+                <td>{{ $book->title }}</td>
+                <td>{{ $book->summary }}</td>
                 <td>
-                    <a href="{{ route('create-pub', ['section' => 'edit', 'type' => 'book', 'pub' => $pub->id]) }}"
-                        value="edit" title="edit"><i class="fas fa-edit"></i></a>
-                    <a href="{{ route('delpub', ['pub' => $pub->id]) }}" value="delete" title="delete"><i
+                    @foreach($book->authors() as $author)
+                    {{ $author->name }},
+                    @endforeach
+                </td>
+                <td>{{ $book->topics }}</td>
+                <td>{{ $book->numpages }}</td>
+                <td><a href="{{ route('downpdf', ['filename' => $book->pdffile]) }}">{{ $book->pdffile }}</a></td>
+                <td>
+                    <a href="{{ route('create-book', ['section' => 'edit', 'book' => $book->id]) }}" value="edit"
+                        title="edit"><i class="fas fa-edit"></i></a>
+                    <a href="{{ route('delbook', ['book' => $book->id]) }}" value="delete" title="delete"><i
                             class="fas fa-trash"></i></a>
                 </td>
             </tr>
